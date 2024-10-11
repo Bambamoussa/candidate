@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CandidateApp</string>
+    <string name="last_name">Nom</string>
+    <string name="first_name">Prénom</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="salaire">Prétentions salariales</string>
+    <string name="search_candidate">Rechercher un candidat</string>
 </resources>
