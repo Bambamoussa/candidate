@@ -7,19 +7,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.candidateapp.feature.candidate.data.models.Candidate
 import com.example.candidateapp.feature.candidate.data.repositories.CandidateRepositoryImpl
+
 import com.example.candidateapp.feature.candidate.presentation.uiState.CandidateUiState
-import kotlinx.coroutines.flow.Flow
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
+
+@HiltViewModel
 class CandidateViewModel @Inject constructor( private val  candidateRepository: CandidateRepositoryImpl):
     ViewModel() {
 
 
-    var candidateState : CandidateUiState by mutableStateOf(CandidateUiState.Loading)
+    var candidateState : CandidateUiState by mutableStateOf( CandidateUiState.Loading)
+
     init {
         fetchCandidate()
+
     }
 
     private fun fetchCandidate()
@@ -27,13 +34,12 @@ class CandidateViewModel @Inject constructor( private val  candidateRepository: 
         viewModelScope.launch {
             candidateState = try {
                 val candidates = candidateRepository.getAllCandidate()
-                val candidatesFlow: Flow<List<Candidate>> =  candidates
 
-                // Collecte les données émises par le Flow
                 val candidatesList = mutableListOf<Candidate>()
 
-                candidatesFlow.collect { list ->
-                    candidatesList.addAll(list) // Ajoute les éléments de la liste émise à la liste mutable
+                candidates.collect { list ->
+                    candidatesList.addAll(list)
+                    candidateState = CandidateUiState.Success(candidates = candidatesList)
                 }
 
                 CandidateUiState.Success( candidates= candidatesList)
@@ -43,4 +49,49 @@ class CandidateViewModel @Inject constructor( private val  candidateRepository: 
             }
         }
     }
+
+      fun searchCandidate(item:String)
+    {
+        viewModelScope.launch {
+            candidateState = try {
+                val candidates = candidateRepository.SearchCandidate(item)
+
+                val candidatesList = mutableListOf<Candidate>()
+
+                candidates.collect { list ->
+                    candidatesList.addAll(list)
+                    candidateState = CandidateUiState.Success(candidates = candidatesList)
+                }
+
+                CandidateUiState.Success( candidates= candidatesList)
+            } catch (iO: IOException) {
+                println("error $iO")
+                CandidateUiState.Error(error = iO.toString())
+            }
+        }
+    }
+
+    fun updateCandidate (candidate: Candidate) {
+        viewModelScope.launch(IO) {
+            candidateRepository.updateCandidate(candidate = candidate)
+        }
+    }
+
+    fun deleteCandidate (candidate: Candidate) {
+        viewModelScope.launch(IO) {
+            candidateRepository.deleteCandidate(candidate = candidate)
+        }
+    }
+
+
+    fun addCandidate(candidate: Candidate  ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            candidateRepository.addCandidate(candidate = candidate)
+
+        }
+    }
+
+
+
+
 }

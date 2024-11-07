@@ -8,7 +8,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.candidateapp.feature.candidate.data.models.Candidate
 
-@Database(entities = [Candidate::class], version = 1)
+@Database(entities = [Candidate::class], version = 2,exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun  candidateDao(): CandidateDao
 }

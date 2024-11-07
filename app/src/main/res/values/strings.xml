@@ -6,4 +6,13 @@
     <string name="email">Email</string>
     <string name="salaire">Prétentions salariales</string>
     <string name="search_candidate">Rechercher un candidat</string>
+    <string name="add_candidate">Ajouter un candidat</string>
+    <string name="select_date">Selectionner une date</string>
+    <string name="enter_date">Entrer une date</string>
+    <string name="date">date</string>
+    <string name="note">Notes</string>
+    <string name="about">A propos</string>
+    <string name="editCandidate">Modifier un candidat</string>
+    <string name="issue_name_empty">Le nom ne doit pas être vide</string>
+
 </resources>

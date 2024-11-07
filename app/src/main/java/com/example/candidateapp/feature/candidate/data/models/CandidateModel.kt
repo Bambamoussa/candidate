@@ -9,10 +9,7 @@ import java.util.Date
 
 @Entity(tableName = "candidate")
 data class Candidate(
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "id")
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
 
     @ColumnInfo(name = "lastName")
     val lastName: String,
@@ -20,11 +17,14 @@ data class Candidate(
     @ColumnInfo(name = "firstName")
     val firstName: String,
 
+    @ColumnInfo(name = "isFavorite")
+    val isFavorite: Boolean = false,
+
     @ColumnInfo(name = "phone")
     val phone: String,
 
     @ColumnInfo(name = "email")
-    val empEmail: String,
+    val email: String,
 
     @ColumnInfo(name = "dateOfBirth")
     val dateOfBirth: String,  // Représente un timestamp

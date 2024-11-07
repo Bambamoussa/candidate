@@ -1,9 +1,12 @@
 package com.example.candidateapp.feature.candidate.presentation.widgets
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
@@ -16,16 +19,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import com.example.candidateapp.feature.candidate.data.models.Candidate
 import com.example.candidateapp.feature.candidate.presentation.screens.CandidateListScreen
 import com.example.candidateapp.feature.candidate.presentation.screens.CandidateWishListScreen
 
 @Composable
-fun TabView() {
+fun TabView(
+    onClick: (Candidate) -> Unit
+) {
     val tabs = listOf(
          "Tous","Favoris"
     )
     var selectedTabIndex by remember { mutableStateOf(0) }
+
 
     Column {
 
@@ -63,10 +71,10 @@ fun TabView() {
         }
         when (selectedTabIndex) {
             0 -> {
-                 CandidateListScreen()
+                 CandidateListScreen(onClick = onClick)
             }
             1 -> {
-                CandidateWishListScreen()
+                CandidateWishListScreen(onClick=onClick)
             }
 
         }

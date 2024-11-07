@@ -19,6 +19,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.candidateapp.R
+import com.example.candidateapp.feature.candidate.data.models.Candidate
 import com.example.candidateapp.feature.candidate.domain.entities.CandidateEntity
 import java.text.DecimalFormat
 
@@ -26,7 +27,9 @@ import java.text.DecimalFormat
 
 @Composable
   fun Candidate(
-  candidat: CandidateEntity
+
+  candidat: Candidate,
+  onClick: (Candidate)-> Unit
 
 ) {
     val df = DecimalFormat().apply {
@@ -36,7 +39,8 @@ import java.text.DecimalFormat
     Row(
         modifier = Modifier
 
-            .padding(16.dp),
+
+            .padding(16.dp).clickable { onClick(candidat) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

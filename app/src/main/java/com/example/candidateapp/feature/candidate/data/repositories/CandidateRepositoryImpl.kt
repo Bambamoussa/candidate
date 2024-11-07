@@ -13,7 +13,21 @@ class CandidateRepositoryImpl @Inject constructor(
          return candidateDao.getAllCandidate()
     }
 
+
+
     override suspend fun addCandidate(candidate: Candidate) {
          candidateDao.addCandidate(candidate)
+    }
+
+    override suspend fun deleteCandidate(candidate: Candidate) {
+        candidateDao.deleteCandidate(candidate)
+    }
+
+    override suspend fun updateCandidate(candidate: Candidate) {
+        candidateDao.updateCandidate(candidate)
+    }
+
+    override suspend fun SearchCandidate(item: String): Flow<List<Candidate>> {
+      return  candidateDao.SearchCandidate(item)
     }
 }
