@@ -37,7 +37,9 @@ class CandidateViewModel @Inject constructor( private val  candidateRepository: 
 
                 val candidatesList = mutableListOf<Candidate>()
 
-                candidates.collect { list ->
+                candidates.collect {
+                        list ->
+                    candidatesList.clear()
                     candidatesList.addAll(list)
                     candidateState = CandidateUiState.Success(candidates = candidatesList)
                 }
