@@ -79,6 +79,29 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
     testImplementation 'junit:junit:4.13.2'
+
+    // JUnit
+    testImplementation "junit:junit:4.13.2"
+
+    // AndroidX pour les tests LiveData et ViewModel
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+
+    // Mockito pour le mocking
+    testImplementation "org.mockito:mockito-core:5.5.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
+
+    // Coroutine Test pour les tests de fonctions suspendues et Flow
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
+
+    // AndroidX Test (facultatif, pour les tests Android)
+    testImplementation "androidx.test.ext:junit:1.1.5"
+
+    testImplementation "androidx.test:core:1.5.0"
+
+    // Truth (facultatif, pour des assertions améliorées)
+    testImplementation "com.google.truth:truth:1.1.5"
+
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
